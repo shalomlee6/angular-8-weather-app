@@ -1,0 +1,16 @@
+<mat-card class="weather-card">
+  <mat-card-header>
+    <mat-card-title>{{ weatherCard.dayIconText }}</mat-card-title>
+    <mat-card-subtitle>{{weatherCard.date | date:'medium'}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="weatherCard.dayIcon" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{ weatherCard.tempValue }} {{ weatherCard.tempUnit }}
+    </p>
+  </mat-card-content>
+  <!-- <mat-card-actions>
+    <button mat-button >Save</button>
+    <button mat-button>Remove</button>
+  </mat-card-actions> -->
+</mat-card>

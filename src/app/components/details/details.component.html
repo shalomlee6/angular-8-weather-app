@@ -1,0 +1,42 @@
+<div class="container" *ngIf="weatherData" [style.color]="weatherData.isDayTime ? 'black' : 'white'" [style.background-color]="weatherData.isDayTime ? 'white' : 'darkgray'">
+  <mat-spinner *ngIf="defaultSpinner"></mat-spinner>
+
+  <div class="top-container" #top>
+
+    <div class="current-weather">
+      <div class="left">
+            <img [src]="weatherData.weatherIcon" alt="">
+        </div>
+        <div class="right">
+            <h3>Current Weather In: {{ weatherData.city}}</h3>
+            <h4>{{ weatherData.temperature }} C</h4>
+            <h5>{{ headline }}</h5>
+            <h6>{{ weatherData.weatherText }}</h6>
+            <p>{{ weatherData.date | date:'medium'}}</p>
+      </div>
+    </div>
+
+    <div class="add-to-favorites">
+      <h1 >Add To Favorites</h1>
+      <div class="stage">
+          <div class="heart" (click)="saveItem()" [ngClass]="weatherData.isSaved ? 'is-active' : 'heart'" ></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bottom-container">
+    <ul>
+        <li *ngFor="let weatherCard of weatherCardData">
+            <app-weather-card  [weatherCard]="weatherCard"></app-weather-card>
+        </li>`
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+// :root{
+//   --vivid-red: rgb(217,29,58);
+// }
+
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav, mat-sidenav-content {
+  padding: 16px;
+}
+
+mat-sidenav {
+  color: black;
+  background-color: palegreen;
+  width: 200px;
+}

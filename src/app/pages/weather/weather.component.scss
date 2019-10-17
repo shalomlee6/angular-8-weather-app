@@ -1,0 +1,25 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+app-search {
+  display: flex;
+  justify-content: center;
+  min-width: 150px;
+}
+
+app-details {
+  margin: 50px;
+}
+
+@media screen and (max-width: 700px ) {
+  app-details {
+    margin: 10px;
+  }
+
+}

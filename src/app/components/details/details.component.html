@@ -1,4 +1,4 @@
-<div class="container" *ngIf="weatherData" [ngStyle]="{ 'backgroundImage': getBackgroundImageUrl() }" [style.color]="weatherData.isDayTime ? 'black' : 'white'">
+<div class="container" *ngIf="weatherData" [ngStyle]="{ 'backgroundImage': getBackgroundImageUrl() }" [style.color]="weatherData.isDayTime ? 'black' : 'white'" [style.background-color]="weatherData.isDayTime ? 'white' : 'darkgray'">
   <mat-spinner *ngIf="defaultSpinner"></mat-spinner>
 
   <div class="top-container" #top>

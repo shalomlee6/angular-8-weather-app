@@ -130,9 +130,9 @@ export class DetailsComponent implements OnChanges {
   @HostBinding('style.backgroundImage')
   getBackgroundImageUrl() {
     if (this.weatherData.isDayTime) {
-      return `url(../../../assets/img/day.JPG)`;
+      return `url(assets/img/day.JPG)`;
     } else {
-      return `url(../../../assets/img/night.JPG)`;
+      return `url(assets/img/night.JPG)`;
     }
 
   }

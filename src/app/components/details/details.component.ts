@@ -79,7 +79,7 @@ export class DetailsComponent implements OnChanges {
         this.defaultSpinner = false;
       }
 
-      // Five Dayes Forecast API Call
+      // Five Dayes Forecast API Call a
       if (this.weatherCardData.length === 0) {
         // TODO => 5 days forecast weather  api call
         this.apiService.getFiveDayesForecast(this.cityWeather).subscribe( (data) => {

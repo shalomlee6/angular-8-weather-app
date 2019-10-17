@@ -1,8 +1,8 @@
 <form class="search-form">
   <mat-form-field class="example-full-width">
-    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"
-    onkeypress="return (event.charCode > 64 &&
-	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
+
+    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectedCountry($event)">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option.city">
         {{option.city}}

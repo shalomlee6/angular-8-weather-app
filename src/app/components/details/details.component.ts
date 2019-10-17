@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, HostBinding } from '@angular/core';
 import { WeatherModel } from 'src/app/store/model/weather.model';
 import { ApiService } from 'src/app/services/api.service';
 import { Store } from '@ngrx/store';
@@ -52,7 +52,7 @@ export class DetailsComponent implements OnChanges {
       this.weatherCardData = this.storeService.getWeatherCards(this.cityWeather);
 
       // If undefined get data from the API
-      if (this.weatherData === undefined || this.weatherCardData === undefined) {
+      if (this.weatherData === undefined ) {
 
         // TODO => current weather status api call
         this.apiService.getDeafultWeather(this.cityWeather).subscribe(
@@ -74,7 +74,13 @@ export class DetailsComponent implements OnChanges {
         , ( err: any ) => this.store.dispatch(new actions.LoadItemActionFail(err))
         , () => this.defaultSpinner = false
         );
+      } else {
+        // Update From Store Success
+        this.defaultSpinner = false;
+      }
 
+      // Five Dayes Forecast API Call
+      if (this.weatherCardData.length === 0) {
         // TODO => 5 days forecast weather  api call
         this.apiService.getFiveDayesForecast(this.cityWeather).subscribe( (data) => {
           if (data) {
@@ -98,8 +104,7 @@ export class DetailsComponent implements OnChanges {
         , () => this.fiveDayesForecastingSpinner = false
         );
       } else {
-        // Update From Store Success
-        this.defaultSpinner = false;
+        this.fiveDayesForecastingSpinner = false;
       }
     }
   }
@@ -121,60 +126,15 @@ export class DetailsComponent implements OnChanges {
 
   }
 
-  removeItem() {
-  /**
-   * This Is The Call To The Store But Its Not Working =>
-   * I have a problem that I dident solved in time
-   * This is the call to the store but it returns undefined:
-   *
-   * this.storeData$ = this.store.pipe(select(fromStore.getItems));
-   *
-   * I know what I need to do => use the @ngrx/Entity
-   * and set an id for every new WeatherState that I saved in favorite.
-   * My plan was to use the locationkey as item Id.
-   * I will continue to develope until I will have an awesome app to display.
-   * The problem is that I've never used ngrx before so I studied everything
-   * I can in less then three dayes due to the holidayes.
-   * please consider...
-   */
-  this.store.select('weather', 'weatherData').subscribe( data => {
-    // tslint:disable-next-line: prefer-for-of
-    for ( let i = 0; i < data.length; i++) {
-      if ( data[i].key === this.weatherData.key ) {
-        // Remove Action Here
-        this.store.dispatch(new actions.RemoveItemAction(i));
-      }
+
+  @HostBinding('style.backgroundImage')
+  getBackgroundImageUrl() {
+    if (this.weatherData.isDayTime) {
+      return `url(../../../assets/img/day.jpg)`;
+    } else {
+      return `url(../../../assets/img/night.jpg)`;
     }
-  });
+
   }
-
-  // loadWeatherDataFromStoreCheck(): boolean {
-  // /**
-  //  * This Is The Call To The Store But Its Not Working =>
-  //  * I have a problem that I dident solved in time
-  //  * This is the call to the store but it returns undefined:
-  //  *
-  //  * this.storeData$ = this.store.pipe(select(fromStore.getItems));
-  //  *
-  //  * I know what I need to do => use the @ngrx/Entity
-  //  * and set an id for every new WeatherState that I saved in favorite.
-  //  * My plan was to use the locationkey as item Id.
-  //  * I will continue to develope until I will have an awesome app to display.
-  //  * The problem is that I've never used ngrx before so I studied everything
-  //  * I can in less then three dayes due to the holidayes.
-  //  * please consider...
-  //  */
-
-  //   this.store.select('weather', 'weatherData').subscribe( data => {
-  //     // tslint:disable-next-line: prefer-for-of
-  //     for ( let i = 0; i < data.length; i++) {
-  //       if ( data[i].key === this.cityWeather.key ) {
-  //         // Item In Store
-  //         this.weatherData = data[i];
-  //         return true;
-  //       }
-  //     }
-  //   });
-  // }
 
 }

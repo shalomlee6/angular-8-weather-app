@@ -45,9 +45,9 @@ export class SearchComponent implements OnInit {
     const res: WeatherModel[] = [];
     const filterValue = value.toLowerCase();
 
-    // Make an api call if in production mode and value is not empty ADD => && environment.production
-    if (value !== ''  ) {
-
+    // All letters check
+    const letters = /^[a-zA-Z_ ]*$/;
+    if (value.match(letters) && value !== '' ) {
       this.apiService.getSearchOptions(value).subscribe( (data: Array<any>) => {
         // TODO => Error Check..
         if (data) {
@@ -64,6 +64,26 @@ export class SearchComponent implements OnInit {
         }
       });
     }
+
+    // Make an api call if in production mode and value is not empty ADD => && environment.production
+    // if (value !== ''  ) {
+
+    //   this.apiService.getSearchOptions(value).subscribe( (data: Array<any>) => {
+    //     // TODO => Error Check..
+    //     if (data) {
+    //       data.forEach( item => {
+    //         if (item.LocalizedName.toLowerCase().includes(filterValue)) {
+    //           res.push({key: item.Key, city: item.LocalizedName});
+    //         }
+    //         // this.searchOptions.push({key: item.Key, city: item.LocalizedName});
+    //       });
+    //       // For dynamic search
+    //       this.searchOptions = res;
+    //       // TODO => add a spinner while async call
+    //       return  res;
+    //     }
+    //   });
+    // }
 
     return  res;
   }
